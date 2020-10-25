@@ -2,18 +2,21 @@
   <section class="post-list">
     <PostPreview
       id="1"
+      :is-admin="isAdmin"
       thumbnail="https://picsum.photos/1920/1080"
       title="Post Title"
       previewText="preview text"
     />
     <PostPreview
       id="2"
+      :is-admin="isAdmin"
       thumbnail="https://picsum.photos/1920/1080"
       title="Post Title"
       previewText="preview text"
     />
     <PostPreview
       id="3"
+      :is-admin="isAdmin"
       thumbnail="https://picsum.photos/1920/1080"
       title="Post Title"
       previewText="preview text"
@@ -31,3 +34,14 @@
   justify-content: center;
 }
 </style>
+
+<script>
+export default {
+  props: {
+    isAdmin: {
+      type: Boolean,
+      default: false
+    }
+  }
+};
+</script>
