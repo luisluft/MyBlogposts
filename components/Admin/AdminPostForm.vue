@@ -29,8 +29,10 @@
 <script>
 export default {
   props: {
-    type: Object,
-    required: false
+    post: {
+      type: Object,
+      required: false
+    }
   },
   data() {
     return {
