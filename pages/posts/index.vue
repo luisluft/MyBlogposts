@@ -7,20 +7,25 @@
 
 <script>
 export default {
-  asyncData() {
-    return {
-      loadedPosts: []
-    };
+  asyncData(context) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({
+          loadedPosts: [
+            {
+              id: "1",
+              title: "First Post",
+              previewText: "This is our first post",
+              thumbnail: "https://picsum.photos/1920/1080"
+            }
+          ]
+        });
+      }, 1000);
+    });
   },
   created() {
-    this.loadedPosts = [
-      {
-        id: "1",
-        title: "First Post",
-        previewText: "This is our first post",
-        thumbnail: "https://picsum.photos/1920/1080"
-      }
-    ];
+    this.$store.dispatch("setPosts", this.loadedPosts);
+    console.log(this.$store.getters.loadedPosts);
   }
 };
 </script>
