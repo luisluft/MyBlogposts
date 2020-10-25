@@ -7,7 +7,7 @@
       ></div>
       <div class="post-content">
         <h1>{{ title }}</h1>
-        <p>previewText</p>
+        <p>{{ previewText }}</p>
       </div>
     </article></nuxt-link
   >

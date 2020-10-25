@@ -1,9 +1,26 @@
 <template>
   <div class="posts-page">
     <section class="intro"><h1>Get the latest tech news!</h1></section>
-    <PostList />
+    <PostList :posts="loadedPosts" />
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      loadedPosts: [
+        {
+          id: "1",
+          title: "First Post",
+          previewText: "This is our first post",
+          thumbnail: "https://picsum.photos/1920/1080"
+        }
+      ]
+    };
+  }
+};
+</script>
 
 <style scoped>
 .intro {
