@@ -7,17 +7,20 @@
 
 <script>
 export default {
-  data() {
+  asyncData() {
     return {
-      loadedPosts: [
-        {
-          id: "1",
-          title: "First Post",
-          previewText: "This is our first post",
-          thumbnail: "https://picsum.photos/1920/1080"
-        }
-      ]
+      loadedPosts: []
     };
+  },
+  created() {
+    this.loadedPosts = [
+      {
+        id: "1",
+        title: "First Post",
+        previewText: "This is our first post",
+        thumbnail: "https://picsum.photos/1920/1080"
+      }
+    ];
   }
 };
 </script>
