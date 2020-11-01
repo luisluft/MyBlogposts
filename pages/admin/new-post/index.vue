@@ -17,7 +17,10 @@ export default {
   methods: {
     onSubmitted(postData) {
       console.log(postData);
-      axios.post("https://myblog-25439.firebaseio.com/posts.json", postData);
+      axios.post("https://myblog-25439.firebaseio.com/posts.json", {
+        ...postData,
+        updatedDate: new Date()
+      });
     }
   }
 };
