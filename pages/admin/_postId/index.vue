@@ -17,16 +17,15 @@ export default {
 
   methods: {
     onSubmitted(editedPost) {
-      console.log("here");
       axios
         .put(
           "https://myblog-25439.firebaseio.com/posts/" +
-            this.$route.params.id +
+            this.$route.params.postId +
             ".json",
           editedPost
         )
         .then(response => {
-          console.log(response);
+          this.$router.push("/admin");
         })
         .catch(e => console.log(e));
     }
