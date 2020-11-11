@@ -16,22 +16,13 @@ export default {
   },
 
   methods: {
-    onSubmitted(editedPost) {
-      axios
-        .put(
-          "https://myblog-25439.firebaseio.com/posts/" +
-            this.$route.params.postId +
-            ".json",
-          editedPost
-        )
-        .then(response => {
-          this.$router.push("/admin");
-        })
-        .catch(e => console.log(e));
+    async onSubmitted(editedPost) {
+      await this.$store.dispatch("editPost", editedPost);
+      this.$router.push("/admin");
     }
   },
   async asyncData(context) {
-    let data = await axios
+    return axios
       .get(
         "https://myblog-25439.firebaseio.com/posts/" +
           context.params.postId +
@@ -39,12 +30,10 @@ export default {
       )
       .then(response => {
         return {
-          loadedPost: response.data
+          loadedPost: { ...response.data, id: context.params.postId }
         };
       })
       .catch(e => context.error(e));
-    console.log(data);
-    return data;
   }
 };
 </script>

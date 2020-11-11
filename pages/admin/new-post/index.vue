@@ -15,12 +15,9 @@ export default {
     AdminPostForm
   },
   methods: {
-    onSubmitted(postData) {
-      console.log(postData);
-      axios.post("https://myblog-25439.firebaseio.com/posts.json", {
-        ...postData,
-        updatedDate: new Date()
-      });
+    async onSubmitted(postData) {
+      await this.$store.dispatch("addPost", postData);
+      this.$router.push("/admin");
     }
   }
 };
