@@ -16,17 +16,12 @@ export default {
   },
   computed: {
     loadedPosts() {
-      return this.$store.getters.loadedPosts
+      this.$hello("Luis", "here");
+      return this.$store.getters.loadedPosts;
     }
   }
-  // data() {
-  //   return {
-  //     loadedPosts: []
-  //   };
-  // },
 };
 </script>
-
 
 <style scoped>
 .intro {
