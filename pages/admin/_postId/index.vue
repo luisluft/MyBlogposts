@@ -23,11 +23,7 @@ export default {
   },
   async asyncData(context) {
     return axios
-      .get(
-        "https://myblog-25439.firebaseio.com/posts/" +
-          context.params.postId +
-          ".json"
-      )
+      .get(process.env.baseUrl + "/posts/" + context.params.postId + ".json")
       .then(response => {
         return {
           loadedPost: { ...response.data, id: context.params.postId }
