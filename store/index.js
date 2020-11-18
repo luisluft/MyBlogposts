@@ -22,7 +22,7 @@ const createStore = () => {
     },
     actions: {
       editPost(vuexContext, editedPost) {
-        return axios
+        return this.$axios
           .put(
             process.env.baseUrl + "/posts/" + editedPost.id + ".json",
             editedPost
