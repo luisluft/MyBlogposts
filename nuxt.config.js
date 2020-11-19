@@ -41,6 +41,7 @@ export default {
 
   // environment variables
   env: {
-    baseUrl: process.env.BASE_URL || "https://myblog-25439.firebaseio.com"
+    baseUrl: process.env.BASE_URL || "https://myblog-25439.firebaseio.com",
+    APIkey: "AIzaSyBXF8Ey1CIvtaBRB_BTRLSEP-nmLRMzOKM"
   }
 };

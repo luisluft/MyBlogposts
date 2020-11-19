@@ -19,7 +19,8 @@ export default {
       this.$hello("Luis", "here");
       return this.$store.getters.loadedPosts;
     }
-  }
+  },
+  middleware: "log"
 };
 </script>
 
