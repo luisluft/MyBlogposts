@@ -29,7 +29,8 @@ export default {
   },
   head: {
     title: "admin page"
-  }
+  },
+  middleware: "auth"
 };
 </script>
 

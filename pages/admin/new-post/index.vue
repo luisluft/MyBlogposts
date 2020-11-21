@@ -19,7 +19,8 @@ export default {
       await this.$store.dispatch("addPost", postData);
       this.$router.push("/admin");
     }
-  }
+  },
+  middleware: "auth"
 };
 </script>
 
