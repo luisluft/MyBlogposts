@@ -4,7 +4,8 @@ import axios from "axios";
 const createStore = () => {
   return new Vuex.Store({
     state: {
-      loadedPosts: []
+      loadedPosts: [],
+      token: ""
     },
     mutations: {
       setPosts(state, posts) {
@@ -18,9 +19,31 @@ const createStore = () => {
           post => post.id === editedPost.id
         );
         state.loadedPosts[postIndex] = editedPost;
+      },
+      setToken(state, token) {
+        state.token = token;
       }
     },
     actions: {
+      authenticateUser(vuexContext, authData) {
+        let authURL =
+          "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" +
+          process.env.APIkey;
+
+        if (!authData.isLogin) {
+          authURL =
+            "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=" +
+            process.env.APIkey;
+        }
+        return this.$axios
+          .$post(authURL, {
+            email: authData.email,
+            password: authData.password,
+            returnSecureToken: true
+          })
+          .then(result => this.commit("setToken", result.idToken))
+          .catch(error => console.log(error.response.data.error.message));
+      },
       editPost(vuexContext, editedPost) {
         return this.$axios
           .put(

@@ -41,23 +41,13 @@ export default {
   },
   methods: {
     onSubmit() {
-      let authURL =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" +
-        process.env.APIkey;
-
-      if (!this.isLogin) {
-        authURL =
-          "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=" +
-          process.env.APIkey;
-      }
-      this.$axios
-        .$post(authURL, {
+      this.$store
+        .dispatch("authenticateUser", {
+          isLogin: this.isLogin,
           email: this.email,
-          password: this.password,
-          returnSecureToken: true
+          password: this.password
         })
-        .then(result => console.log(result))
-        .catch(error => console.log(error.response.data.error.message));
+        .then(() => this.$router.push("/admin"));
     }
   }
 };
