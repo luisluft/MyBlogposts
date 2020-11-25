@@ -46,9 +46,9 @@ const createStore = () => {
             returnSecureToken: true
           })
           .then(result => {
-            let expirationDate = new Date().getTime() + result.expiresIn * 1000;
+            let expirationDate =
+              new Date().getTime() + Number.parseInt(result.expiresIn) * 1000;
             this.commit("setToken", result.idToken);
-            vuexContext.dispatch("setLogoutTimer", result.expiresIn * 1000);
             localStorage.setItem("token", result.idToken);
             localStorage.setItem("tokenExpiration", expirationDate);
             Cookie.set("jwt", result.idToken);
@@ -73,8 +73,10 @@ const createStore = () => {
         } else {
           token = localStorage.getItem("token");
           expirationDate = localStorage.getItem("tokenExpiration");
-          if (new Date() > expirationDate || !token) return;
-          else vuexContext.commit("setToken", token);
+          if (new Date() > expirationDate || !token) {
+            console.log("No token or invalid token");
+            vuexContext.commit("clearToken");
+          } else vuexContext.commit("setToken", token);
         }
       },
       editPost(vuexContext, editedPost) {
@@ -108,11 +110,6 @@ const createStore = () => {
               id: result.data.name
             });
           });
-      },
-      setLogoutTimer(vuexContext, duration) {
-        setTimeout(() => {
-          vuexContext.commit("clearToken");
-        }, duration);
       },
       nuxtServerInit(vuexContext, context) {
         return axios
