@@ -75,7 +75,7 @@ const createStore = () => {
           expirationDate = localStorage.getItem("tokenExpiration");
           if (new Date() > expirationDate || !token) {
             console.log("No token or invalid token");
-            vuexContext.commit("clearToken");
+            vuexContext.dispatch("logout");
           } else vuexContext.commit("setToken", token);
         }
       },
@@ -125,6 +125,17 @@ const createStore = () => {
       },
       setPosts(vuexContext, posts) {
         vuexContext.commit("setPosts", posts);
+      },
+      logout(vuexContext) {
+        // when running on the server side
+        vuexContext.commit("clearToken");
+        Cookie.remove("jwt");
+        Cookie.remove("expirationDate");
+        // when running on the client side
+        if (process.client) {
+          localStorage.removeItem("token");
+          localStorage.removeItem("tokenExpiration");
+        }
       }
     },
     getters: {
