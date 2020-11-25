@@ -30,7 +30,7 @@ export default {
   head: {
     title: "admin page"
   },
-  middleware: "auth"
+  middleware: ["check-auth", "auth"]
 };
 </script>
 

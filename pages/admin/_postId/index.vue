@@ -21,7 +21,7 @@ export default {
       this.$router.push("/admin");
     }
   },
-  middleware: "auth",
+  middleware: ["check-auth", "auth"],
   async asyncData(context) {
     return axios
       .get(process.env.baseUrl + "/posts/" + context.params.postId + ".json")
